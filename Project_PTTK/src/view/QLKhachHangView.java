@@ -19,8 +19,10 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class DatPhongView extends JFrame {
+public class QLKhachHangView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtTmTheoTn;
@@ -32,7 +34,7 @@ public class DatPhongView extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DatPhongView frame = new DatPhongView();
+					QLKhachHangView frame = new QLKhachHangView();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +46,7 @@ public class DatPhongView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DatPhongView() {
+	public QLKhachHangView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
@@ -56,7 +58,7 @@ public class DatPhongView extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.WEST);
 		panel.setLayout(new GridLayout(14, 1, 0, 0));
-
+		
 		JButton btnNewButton_x = new JButton("Đăng xuất");
 		panel.add(btnNewButton_x);
 		
@@ -98,65 +100,60 @@ public class DatPhongView extends JFrame {
 
 		JButton btnNewButton_11 = new JButton("QL nhân viên");
 		panel.add(btnNewButton_11);
-
+		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new BorderLayout(0, 10));
 
-		String[] columnNames = { "Mã phiếu", "Tên khách hàng", "Ngày lập phiếu", "Tên nhân viên", "Chi tiết", "Xóa" };
 
-		String[][] data = { { "PD01", "Trần Kim Tiên", "2/1/2023", "Lê Thị Chung", "...", "X" },
-				{ "PD02", "Trần Thị Tiên", "4/1/2023", "Lê Thị Chung", "...", "X" },
-				{ "PD03", "Trần Minh Khôi", "8/1/2023", "Lê Kim Anh", "...", "X" },
-				{ "PD04", "Trần Minh Khoa", "8/1/2023", "Lê Kim Anh", "...", "X" },
-				{ "PD05", "Trần Minh Khoa", "11/2/2023", "Lê Kim Anh", "...", "X" },
-				{ "PD06", "Trần Minh Khoa", "9/3/2023", "Lê Kim Anh", "...", "X" },
-				{ "PD07", "Trần Minh Tiến", "9/3/2023", "Lê Kim Anh", "...", "X" },
-				{ "PD08", "Trần Anh Khoa", "12/3/2023", "Lê Kim Anh", "...", "X" },
-				{ "PD09", "Trần Minh Khương", "21/3/2023", "Lê Kim Anh", "...", "X" },
-				{ "PD10", "Trần Minh Khoa", "29/3/2023", "Lê Kim Anh", "...", "X" },
-				{ "PD11", "Trần Minh Khôi", "29/3/2023", "Lê Kim Anh", "...", "X" } };
+		String[] columnNames = { "Mã khách hàng", "CCCD", "Tên khách hàng", "Ngày sinh", "SDT", "Địa chỉ", "Gmail", "Xóa" };
 
+		String[][] data = { { "KH01", "079212345678", "Trần Minh Đạo", "19/8/1991", "0918645789", "Quận 5", "tg@gmail.com", "X" },
+				{ "KH02", "079212345679", "Trần Văn Khoa", "19/8/1987", "0918625789", "Quận 1", "tvk@gmail.com", "X" },
+				{ "KH03", "079212345648", "Trần Cảnh ", "9/7/1995", "0918645781", "Quận 3", "tgdg@gmail.com", "X" } };
+		
 		JTable table = new JTable(data, columnNames);
 		table.setBounds(30, 40, 200, 300);
 		JScrollPane scrollPane = new JScrollPane(table);
 		panel_1.add(scrollPane, BorderLayout.CENTER);
-
+		
 		JPanel panel_2 = new JPanel();
 		panel_1.add(panel_2, BorderLayout.NORTH);
 		panel_2.setLayout(new BorderLayout(0, 0));
-
+		
 		txtTmTheoTn = new JTextField();
-		txtTmTheoTn.setToolTipText("Tìm theo tên khách hàng");
 		panel_2.add(txtTmTheoTn, BorderLayout.CENTER);
 		txtTmTheoTn.setColumns(10);
-
-		// Set the foreground color to gray to indicate the placeholder text
+		
+		  // Set the foreground color to gray to indicate the placeholder text
 		txtTmTheoTn.setForeground(Color.GRAY);
+		txtTmTheoTn.setText("Tìm theo tên khách hàng");
 		txtTmTheoTn.addFocusListener((FocusListener) new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				// When the text field gains focus, remove the placeholder text
-				if (txtTmTheoTn.getText().equals("Tìm theo tên khách hàng")) {
-					txtTmTheoTn.setText("");
-					txtTmTheoTn.setForeground(Color.BLACK);
-				}
-			}
-
-			@Override
-			public void focusLost(FocusEvent e) {
-				// When the text field loses focus, set the placeholder text if no text was
-				// entered
-				if (txtTmTheoTn.getText().isEmpty()) {
-					txtTmTheoTn.setText("Tìm theo tên khách hàng");
-					txtTmTheoTn.setForeground(Color.GRAY);
-				}
+	            @Override
+	            public void focusGained(FocusEvent e) {
+	                // When the text field gains focus, remove the placeholder text
+	                if (txtTmTheoTn.getText().equals("Tìm theo tên khách hàng")) {
+	                	txtTmTheoTn.setText("");
+	                	txtTmTheoTn.setForeground(Color.BLACK);
+	                }
+	            }
+	            @Override
+	            public void focusLost(FocusEvent e) {
+	                // When the text field loses focus, set the placeholder text if no text was entered
+	                if (txtTmTheoTn.getText().isEmpty()) {
+	                	txtTmTheoTn.setText("Tìm theo tên khách hàng");
+	                	txtTmTheoTn.setForeground(Color.GRAY);
+	                }
+	            }
+	        });
+		
+		JButton btnNewButton_12 = new JButton("Thêm khách hàng");
+		btnNewButton_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 			}
 		});
-
-		JButton btnNewButton_12 = new JButton("Đặt phòng");
 		panel_2.add(btnNewButton_12, BorderLayout.EAST);
-
+		
 	}
 
 }

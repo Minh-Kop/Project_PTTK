@@ -182,7 +182,7 @@ public class PhieuDatPhongView extends JFrame {
 		dateChooser_1.setBounds(661, 73, 106, 19);
 		panel.add(dateChooser_1);
 		
-		JLabel lblNewLabel_3_2_1 = new JLabel("Danh  sách phòng trống");
+		JLabel lblNewLabel_3_2_1 = new JLabel("Danh sách phòng trống");
 		lblNewLabel_3_2_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel_3_2_1.setBounds(412, 124, 197, 28);
 		panel.add(lblNewLabel_3_2_1);
