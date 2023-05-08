@@ -121,12 +121,12 @@ public class TourKHView extends JFrame {
 		JTable table = new JTable(data, columnNames);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"T01", "KH01", "30/4/2023", "2", "true", "Kh\u00F4ng", "X"},
-				{"T02", "KH02", "1/4/2023", "3", "false", "Kh\u00F4ng", "X"},
-				{"T03", "KH03", "15/6/2023", "1", "true", "Kh\u00F4ng", "X"},
+				{"T01", "KH01", "30/4/2023", "2", "true", "Kh\u00F4ng", "S\u1EEDa", "X"},
+				{"T02", "KH02", "1/4/2023", "3", "false", "Kh\u00F4ng", "S\u1EEDa", "X"},
+				{"T03", "KH03", "15/6/2023", "1", "true", "Kh\u00F4ng", "S\u1EEDa", "X"},
 			},
 			new String[] {
-				"M\u00E3 tour", "M\u00E3 Kh\u00E1ch H\u00E0ng", "Th\u1EDDi Gian", "S\u1ED1 Ng\u01B0\u1EDDi", "\u0110\u01B0a \u0111\u00F3n", "Nhu c\u1EA7u \u0111\u1EB7c bi\u1EC7t", "X\u00F3a"
+				"M\u00E3 tour", "M\u00E3 Kh\u00E1ch H\u00E0ng", "Th\u1EDDi Gian", "S\u1ED1 Ng\u01B0\u1EDDi", "\u0110\u01B0a \u0111\u00F3n", "Nhu c\u1EA7u \u0111\u1EB7c bi\u1EC7t", "S\u1EEDa", "X\u00F3a"
 			}
 		));
 		table.getColumnModel().getColumn(1).setPreferredWidth(99);

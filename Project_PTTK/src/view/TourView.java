@@ -121,12 +121,12 @@ public class TourView extends JFrame {
 		JTable table = new JTable(data, columnNames);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"T01", "Ph\u00FA Qu\u1ED1c", "X"},
-				{"T02", "\u0110\u1ED3ng Nai", "X"},
-				{"T03", "\u0110\u00E0 L\u1EA1t", "X"},
+				{"T01", "Ph\u00FA Qu\u1ED1c", "S\u1EEDa", "X"},
+				{"T02", "\u0110\u1ED3ng Nai", "S\u1EEDa", "X"},
+				{"T03", "\u0110\u00E0 L\u1EA1t", "S\u1EEDa", "X"},
 			},
 			new String[] {
-				"M\u00E3 tour", "T\u00EAn tour", "X\u00F3a"
+				"M\u00E3 tour", "T\u00EAn tour", "S\u1EEDa", "X\u00F3a"
 			}
 		));
 		table.setBounds(30, 40, 200, 300);

@@ -121,12 +121,12 @@ public class LoaiPhongView extends JFrame {
 		JTable table = new JTable(data, columnNames);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"LP01", "Ph\u00F2ng \u0111\u01A1n", "200000", "X"},
-				{"LP02", "Ph\u00F2ng \u0111\u00F4i", "300000", "X"},
-				{"LP03", "Ph\u00F2ng VIP", "500000", "X"},
+				{"LP01", "Ph\u00F2ng \u0111\u01A1n", "200000", "S\u1EEDa", "X"},
+				{"LP02", "Ph\u00F2ng \u0111\u00F4i", "300000", "S\u1EEDa", "X"},
+				{"LP03", "Ph\u00F2ng VIP", "500000", "S\u1EEDa", "X"},
 			},
 			new String[] {
-				"M\u00E3 lo\u1EA1i ph\u00F2ng", "T\u00EAn lo\u1EA1i ph\u00F2ng", "Gi\u00E1", "X\u00F3a"
+				"M\u00E3 lo\u1EA1i ph\u00F2ng", "T\u00EAn lo\u1EA1i ph\u00F2ng", "Gi\u00E1", "S\u1EEDa", "X\u00F3a"
 			}
 		));
 		table.setBounds(30, 40, 200, 300);
