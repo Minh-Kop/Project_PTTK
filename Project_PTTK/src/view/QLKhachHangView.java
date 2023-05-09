@@ -21,7 +21,6 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.BoxLayout;
 
 public class QLKhachHangView extends JFrame {
 
@@ -107,11 +106,11 @@ public class QLKhachHangView extends JFrame {
 		panel_1.setLayout(new BorderLayout(0, 10));
 
 
-		String[] columnNames = { "Mã khách hàng", "CCCD", "Tên khách hàng", "Ngày sinh", "SDT", "Địa chỉ", "Gmail", "Chỉnh sửa", "Xóa" };
+		String[] columnNames = { "Mã khách hàng", "CCCD", "Tên khách hàng", "Ngày sinh", "SDT", "Địa chỉ", "Gmail", "Xóa" };
 
-		String[][] data = { { "KH01", "079212345678", "Trần Minh Đạo", "19/8/1991", "0918645789", "Quận 5", "tg@gmail.com", "...","X" },
-				{ "KH02", "079212345679", "Trần Văn Khoa", "19/8/1987", "0918625789", "Quận 1", "tvk@gmail.com", "...","X" },
-				{ "KH03", "079212345648", "Trần Cảnh ", "9/7/1995", "0918645781", "Quận 3", "tgdg@gmail.com", "...","X" } };
+		String[][] data = { { "KH01", "079212345678", "Trần Minh Đạo", "19/8/1991", "0918645789", "Quận 5", "tg@gmail.com", "X" },
+				{ "KH02", "079212345679", "Trần Văn Khoa", "19/8/1987", "0918625789", "Quận 1", "tvk@gmail.com", "X" },
+				{ "KH03", "079212345648", "Trần Cảnh ", "9/7/1995", "0918645781", "Quận 3", "tgdg@gmail.com", "X" } };
 		
 		JTable table = new JTable(data, columnNames);
 		table.setBounds(30, 40, 200, 300);
@@ -120,10 +119,10 @@ public class QLKhachHangView extends JFrame {
 		
 		JPanel panel_2 = new JPanel();
 		panel_1.add(panel_2, BorderLayout.NORTH);
-		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
+		panel_2.setLayout(new BorderLayout(0, 0));
 		
 		txtTmTheoTn = new JTextField();
-		panel_2.add(txtTmTheoTn);
+		panel_2.add(txtTmTheoTn, BorderLayout.CENTER);
 		txtTmTheoTn.setColumns(10);
 		
 		  // Set the foreground color to gray to indicate the placeholder text
@@ -153,10 +152,7 @@ public class QLKhachHangView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		
-		JButton btnSearch = new JButton("Tìm");
-		panel_2.add(btnSearch);
-		panel_2.add(btnNewButton_12);
+		panel_2.add(btnNewButton_12, BorderLayout.EAST);
 		
 	}
 
