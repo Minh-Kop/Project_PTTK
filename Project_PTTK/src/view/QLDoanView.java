@@ -20,6 +20,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.BoxLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class QLDoanView extends JFrame {
 
@@ -71,12 +73,23 @@ public class QLDoanView extends JFrame {
 		panel.add(btnNewButton_1);
 
 		JButton btnNewButton_2 = new JButton("QL đoàn");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		panel.add(btnNewButton_2);
 
 		JButton btnNewButton_3 = new JButton("QL khách hàng");
 		panel.add(btnNewButton_3);
 
 		JButton btnNewButton_4 = new JButton("QL phòng");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				QLPhongView QLPhongView = new QLPhongView();
+				QLPhongView.show();
+				dispose();
+			}
+		});
 		panel.add(btnNewButton_4);
 
 		JButton btnNewButton_5 = new JButton("QL loại phòng");

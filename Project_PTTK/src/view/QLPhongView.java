@@ -95,6 +95,13 @@ public class QLPhongView extends JFrame {
 		panel.add(btnNewButton_4);
 
 		JButton btnNewButton_5 = new JButton("QL loại phòng");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LoaiPhongView lpv = new LoaiPhongView();
+				lpv.show();
+				dispose();
+			}
+		});
 		panel.add(btnNewButton_5);
 
 		JButton btnNewButton_6 = new JButton("QL dịch vụ theo ngày");
@@ -181,6 +188,13 @@ public class QLPhongView extends JFrame {
 								panel_3.add(nhapButton);
 								
 								JButton btnThemPhong = new JButton("Thêm phòng");
+								btnThemPhong.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										ThemPhongView tpv = new ThemPhongView();
+										tpv.show();
+										dispose();
+									}
+								});
 								panel_3.add(btnThemPhong);
 
 	}

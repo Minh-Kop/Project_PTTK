@@ -1,4 +1,4 @@
-package view;
+package src.view;
 
 import java.awt.EventQueue;
 
@@ -20,6 +20,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LoaiPhongView extends JFrame {
 
@@ -77,6 +79,13 @@ public class LoaiPhongView extends JFrame {
 		panel.add(btnNewButton_3);
 
 		JButton btnNewButton_4 = new JButton("QL phòng");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				QLPhongView qlp = new QLPhongView();
+				qlp.show();
+				dispose();
+			}
+		});
 		panel.add(btnNewButton_4);
 
 		JButton btnNewButton_5 = new JButton("QL loại phòng");
@@ -134,6 +143,11 @@ public class LoaiPhongView extends JFrame {
 		panel_1.add(scrollPane, BorderLayout.CENTER);
 		
 		JButton btnNewButton_12_1 = new JButton("Thêm loại phòng");
+		btnNewButton_12_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ThemLoaiPhongView t = new ThemLoaiPhongView();
+			}
+		});
 		btnNewButton_12_1.setVerticalAlignment(SwingConstants.TOP);
 		panel_1.add(btnNewButton_12_1, BorderLayout.SOUTH);
 
