@@ -21,6 +21,8 @@ import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.SpringLayout;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ThemPhongView extends JFrame {
 
@@ -153,6 +155,13 @@ public class ThemPhongView extends JFrame {
 		panel_1.add(textField_4);
 		
 		JButton btnNewButton_1 = new JButton("Hủy");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				QLPhongView qlp = new QLPhongView();
+				qlp.show();
+				dispose();
+			}
+		});
 		sl_panel_1.putConstraint(SpringLayout.SOUTH, textField_4, -39, SpringLayout.NORTH, btnNewButton_1);
 		sl_panel_1.putConstraint(SpringLayout.NORTH, btnNewButton_1, 299, SpringLayout.NORTH, panel_1);
 		sl_panel_1.putConstraint(SpringLayout.EAST, btnNewButton_1, -57, SpringLayout.EAST, panel_1);
@@ -160,6 +169,13 @@ public class ThemPhongView extends JFrame {
 		panel_1.add(btnNewButton_1);
 		
 		JButton btnNewButton = new JButton("Lưu");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				QLPhongView qlp = new QLPhongView();
+				qlp.show();
+				dispose();
+			}
+		});
 		sl_panel_1.putConstraint(SpringLayout.NORTH, btnNewButton, 299, SpringLayout.NORTH, panel_1);
 		sl_panel_1.putConstraint(SpringLayout.EAST, btnNewButton, -58, SpringLayout.WEST, btnNewButton_1);
 		panel_1.add(btnNewButton);
