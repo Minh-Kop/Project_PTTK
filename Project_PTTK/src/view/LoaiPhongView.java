@@ -143,7 +143,6 @@ public class LoaiPhongView extends JFrame {
 
 		txtTmTheoTn = new JTextField();
 		txtTmTheoTn.setText("Tìm kiếm theo loại phòng");
-		txtTmTheoTn.setToolTipText("Tìm theo tên khách hàng");
 		panel_2.add(txtTmTheoTn, BorderLayout.CENTER);
 		txtTmTheoTn.setColumns(10);
 
@@ -153,7 +152,7 @@ public class LoaiPhongView extends JFrame {
 			@Override
 			public void focusGained(FocusEvent e) {
 				// When the text field gains focus, remove the placeholder text
-				if (txtTmTheoTn.getText().equals("Tìm theo tên khách hàng")) {
+				if (txtTmTheoTn.getText().equals("Tìm kiếm theo loại phòng")) {
 					txtTmTheoTn.setText("");
 					txtTmTheoTn.setForeground(Color.BLACK);
 				}
@@ -164,7 +163,7 @@ public class LoaiPhongView extends JFrame {
 				// When the text field loses focus, set the placeholder text if no text was
 				// entered
 				if (txtTmTheoTn.getText().isEmpty()) {
-					txtTmTheoTn.setText("Tìm theo tên khách hàng");
+					txtTmTheoTn.setText("Tìm kiếm theo loại phòng");
 					txtTmTheoTn.setForeground(Color.GRAY);
 				}
 			}

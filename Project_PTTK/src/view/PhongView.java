@@ -131,30 +131,30 @@ public class PhongView extends JFrame {
 		JPanel panel_2 = new JPanel();
 		panel_1.add(panel_2, BorderLayout.NORTH);
 		panel_2.setLayout(new BorderLayout(0, 0));
-		
+
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"", "Phòng đơn", "Phòng đôi", "Phòng suite"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "", "Phòng đơn", "Phòng đôi", "Phòng suite" }));
 		panel_2.add(comboBox, BorderLayout.CENTER);
-		
+
 		JDateChooser dateChooser = new JDateChooser();
 		panel_2.add(dateChooser, BorderLayout.NORTH);
-		
+
 		JPanel panel_3 = new JPanel();
 		panel_2.add(panel_3, BorderLayout.SOUTH);
 		panel_3.setLayout(new BorderLayout(0, 0));
-		
-				txtTmTheoPhng = new JTextField();
-				panel_3.add(txtTmTheoPhng, BorderLayout.CENTER);
-				txtTmTheoPhng.setText("Tìm theo phòng");
-				txtTmTheoPhng.setForeground(Color.GRAY);
-				txtTmTheoPhng.setColumns(10);
-				
-						// Set the foreground color to gray to indicate the placeholder text
-						txtTmTheoPhng.setForeground(Color.GRAY);
-						txtTmTheoPhng.setText("Tìm theo phòng");
-						
-						JButton nhapButton = new JButton("Enter");
-						panel_3.add(nhapButton, BorderLayout.EAST);
+
+		txtTmTheoPhng = new JTextField();
+		panel_3.add(txtTmTheoPhng, BorderLayout.CENTER);
+		txtTmTheoPhng.setText("Tìm theo phòng");
+		txtTmTheoPhng.setForeground(Color.GRAY);
+		txtTmTheoPhng.setColumns(10);
+
+		// Set the foreground color to gray to indicate the placeholder text
+		txtTmTheoPhng.setForeground(Color.GRAY);
+		txtTmTheoPhng.setText("Tìm theo phòng");
+
+		JButton nhapButton = new JButton("Enter");
+		panel_3.add(nhapButton, BorderLayout.EAST);
 		txtTmTheoPhng.addFocusListener((FocusListener) new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
