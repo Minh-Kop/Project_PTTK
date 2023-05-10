@@ -145,7 +145,9 @@ public class LoaiPhongView extends JFrame {
 		JButton btnNewButton_12_1 = new JButton("Thêm loại phòng");
 		btnNewButton_12_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ThemLoaiPhongView t = new ThemLoaiPhongView();
+				ThemLoaiPhongView tlpv = new ThemLoaiPhongView();
+				tlpv.show();
+				dispose();
 			}
 		});
 		btnNewButton_12_1.setVerticalAlignment(SwingConstants.TOP);
