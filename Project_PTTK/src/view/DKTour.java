@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.JCheckBox;
+import javax.swing.JButton;
 
 public class DKTour extends JFrame {
 
@@ -56,7 +57,7 @@ public class DKTour extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Mã tour");
-		lblNewLabel_1.setBounds(55, 100, 45, 13);
+		lblNewLabel_1.setBounds(55, 100, 74, 13);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Đăng ký tour");
@@ -69,7 +70,7 @@ public class DKTour extends JFrame {
 		contentPane.add(textField_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Thời gian");
-		lblNewLabel_1_1.setBounds(55, 141, 45, 13);
+		lblNewLabel_1_1.setBounds(55, 141, 74, 13);
 		contentPane.add(lblNewLabel_1_1);
 		
 		textField_2 = new JTextField();
@@ -78,7 +79,7 @@ public class DKTour extends JFrame {
 		contentPane.add(textField_2);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("Số lượng");
-		lblNewLabel_1_1_1.setBounds(55, 177, 45, 13);
+		lblNewLabel_1_1_1.setBounds(55, 177, 74, 13);
 		contentPane.add(lblNewLabel_1_1_1);
 		
 		JSpinner spinner = new JSpinner();
@@ -95,7 +96,11 @@ public class DKTour extends JFrame {
 		textField_3.setColumns(10);
 		
 		JLabel lblNewLabel_1_1_1_1 = new JLabel("Nhu cầu đặc biệt");
-		lblNewLabel_1_1_1_1.setBounds(55, 205, 81, 26);
+		lblNewLabel_1_1_1_1.setBounds(55, 205, 110, 26);
 		contentPane.add(lblNewLabel_1_1_1_1);
+		
+		JButton btnNewButton = new JButton("Đăng ký");
+		btnNewButton.setBounds(323, 223, 85, 21);
+		contentPane.add(btnNewButton);
 	}
 }
