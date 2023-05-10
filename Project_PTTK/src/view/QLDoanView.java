@@ -1,4 +1,4 @@
-package view;
+package src.view;
 
 import java.awt.EventQueue;
 
@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import java.awt.CardLayout;
 import java.awt.Color;
+import javax.swing.BoxLayout;
 
 public class QLDoanView extends JFrame {
 
@@ -104,11 +105,11 @@ public class QLDoanView extends JFrame {
 		panel_1.setLayout(new BorderLayout(0, 10));
 
 
-		String[] columnNames = { "Mã đoàn", "Tên đoàn", "Trưởng đoàn", "Số lượng phòng", "Ngày đến", "Ngày đi", "Xóa" };
+		String[] columnNames = { "Mã đoàn", "Tên đoàn", "Trưởng đoàn", "Số lượng phòng", "Ngày đến", "Ngày đi", "Chỉnh sửa","Xóa" };
 
-		String[][] data = { { "D01", "Đoàn King Konn", "Trần Văn Đạo", "10", "19/2/2023", "22/2/2023", "X" },
-				{ "D02", "Đoàn Kong", "Trần Văn An", "10", "19/2/2023", "22/2/2023", "X" },
-				{ "D03", "Đoàn Kon Kon", "Lý Hưng Đạo", "12", "29/2/2023", "5/3/2023", "X" } };
+		String[][] data = { { "D01", "Đoàn King Konn", "Trần Văn Đạo", "10", "19/2/2023", "22/2/2023", "...","X" },
+				{ "D02", "Đoàn Kong", "Trần Văn An", "10", "19/2/2023", "22/2/2023", "...","X" },
+				{ "D03", "Đoàn Kon Kon", "Lý Hưng Đạo", "12", "29/2/2023", "5/3/2023", "...","X" } };
 		
 		JTable table = new JTable(data, columnNames);
 		table.setBounds(30, 40, 200, 300);
@@ -117,10 +118,10 @@ public class QLDoanView extends JFrame {
 		
 		JPanel panel_2 = new JPanel();
 		panel_1.add(panel_2, BorderLayout.NORTH);
-		panel_2.setLayout(new BorderLayout(0, 0));
+		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
 		
 		txtTmTheoTn = new JTextField();
-		panel_2.add(txtTmTheoTn, BorderLayout.CENTER);
+		panel_2.add(txtTmTheoTn);
 		txtTmTheoTn.setColumns(10);
 		
 		  // Set the foreground color to gray to indicate the placeholder text
@@ -145,8 +146,11 @@ public class QLDoanView extends JFrame {
 	            }
 	        });
 		
+		JButton btnSearch = new JButton("Tìm");
+		panel_2.add(btnSearch);
+		
 		JButton btnNewButton_12 = new JButton("Thêm đoàn");
-		panel_2.add(btnNewButton_12, BorderLayout.EAST);
+		panel_2.add(btnNewButton_12);
 		
 	}
 
