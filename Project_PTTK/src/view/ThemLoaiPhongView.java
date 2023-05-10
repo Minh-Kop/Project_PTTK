@@ -15,10 +15,11 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class ThemLoaiPhongView {
+public class ThemLoaiPhongView extends JFrame {
 
-	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -31,7 +32,7 @@ public class ThemLoaiPhongView {
 			public void run() {
 				try {
 					ThemLoaiPhongView window = new ThemLoaiPhongView();
-					window.frame.setVisible(true);
+					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -50,10 +51,9 @@ public class ThemLoaiPhongView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 226);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		setBounds(100, 100, 450, 226);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Thêm Loại Phòng");
 		lblNewLabel.setForeground(new Color(255, 128, 64));
@@ -62,12 +62,12 @@ public class ThemLoaiPhongView {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setToolTipText("");
 		
-		frame.getContentPane().add(lblNewLabel);
+		getContentPane().add(lblNewLabel);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(26, 32, 388, 134);
-		frame.getContentPane().add(panel);
+		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("Mã Loại Phòng");
@@ -93,10 +93,24 @@ public class ThemLoaiPhongView {
 		textField_1.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Thêm");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LoaiPhongView lpv = new LoaiPhongView();
+				lpv.show();
+				dispose();
+			}
+		});
 		btnNewButton.setBounds(300, 113, 88, 21);
 		panel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Hủy");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LoaiPhongView lpv = new LoaiPhongView();
+				lpv.show();
+				dispose();
+			}
+		});
 		btnNewButton_1.setBounds(205, 113, 85, 21);
 		panel.add(btnNewButton_1);
 		
