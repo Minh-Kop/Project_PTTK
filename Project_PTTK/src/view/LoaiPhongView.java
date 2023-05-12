@@ -1,4 +1,4 @@
-package src.view;
+package view;
 
 import java.awt.EventQueue;
 
@@ -11,12 +11,23 @@ import java.awt.GridLayout;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import database.JDBCUtil;
+import model.LoaiPhongModel;
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.SwingConstants;
@@ -27,6 +38,8 @@ public class LoaiPhongView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtTmTheoTn;
+	private JTable table;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -112,34 +125,25 @@ public class LoaiPhongView extends JFrame {
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new BorderLayout(0, 10));
+		
+		String[] columnNames = { };
+		Object[][] data = {};
+		DefaultTableModel model = new DefaultTableModel(data, columnNames);
 
-		String[] columnNames = { "Mã phiếu", "Tên khách hàng", "Ngày lập phiếu", "Tên nhân viên", "Chi tiết", "Xóa" };
-
-		String[][] data = { { "PD01", "Trần Kim Tiên", "2/1/2023", "Lê Thị Chung", "...", "X" },
-				{ "PD02", "Trần Thị Tiên", "4/1/2023", "Lê Thị Chung", "...", "X" },
-				{ "PD03", "Trần Minh Khôi", "8/1/2023", "Lê Kim Anh", "...", "X" },
-				{ "PD04", "Trần Minh Khoa", "8/1/2023", "Lê Kim Anh", "...", "X" },
-				{ "PD05", "Trần Minh Khoa", "11/2/2023", "Lê Kim Anh", "...", "X" },
-				{ "PD06", "Trần Minh Khoa", "9/3/2023", "Lê Kim Anh", "...", "X" },
-				{ "PD07", "Trần Minh Tiến", "9/3/2023", "Lê Kim Anh", "...", "X" },
-				{ "PD08", "Trần Anh Khoa", "12/3/2023", "Lê Kim Anh", "...", "X" },
-				{ "PD09", "Trần Minh Khương", "21/3/2023", "Lê Kim Anh", "...", "X" },
-				{ "PD10", "Trần Minh Khoa", "29/3/2023", "Lê Kim Anh", "...", "X" },
-				{ "PD11", "Trần Minh Khôi", "29/3/2023", "Lê Kim Anh", "...", "X" } };
-
-		JTable table = new JTable(data, columnNames);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"LP01", "Ph\u00F2ng \u0111\u01A1n", "200000", "S\u1EEDa", "X"},
-				{"LP02", "Ph\u00F2ng \u0111\u00F4i", "300000", "S\u1EEDa", "X"},
-				{"LP03", "Ph\u00F2ng VIP", "500000", "S\u1EEDa", "X"},
-			},
-			new String[] {
-				"M\u00E3 lo\u1EA1i ph\u00F2ng", "T\u00EAn lo\u1EA1i ph\u00F2ng", "Gi\u00E1", "S\u1EEDa", "X\u00F3a"
-			}
-		));
-		table.setBounds(30, 40, 200, 300);
-		JScrollPane scrollPane = new JScrollPane(table);
+		table = new JTable(model);
+//		JTable table = new JTable(data, columnNames);
+//		table.setModel(new DefaultTableModel(
+//			new Object[][] {
+//				{"LP01", "Ph\u00F2ng \u0111\u01A1n", "200000", "S\u1EEDa", "X"},
+//				{"LP02", "Ph\u00F2ng \u0111\u00F4i", "300000", "S\u1EEDa", "X"},
+//				{"LP03", "Ph\u00F2ng VIP", "500000", "S\u1EEDa", "X"},
+//			},
+//			new String[] {
+//				"M\u00E3 lo\u1EA1i ph\u00F2ng", "T\u00EAn lo\u1EA1i ph\u00F2ng", "Gi\u00E1", "S\u1EEDa", "X\u00F3a"
+//			}
+//		));
+		scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panel_1.add(scrollPane, BorderLayout.CENTER);
 		
 		JButton btnNewButton_12_1 = new JButton("Thêm loại phòng");
@@ -189,6 +193,32 @@ public class LoaiPhongView extends JFrame {
 		btnNewButton_12.setVerticalAlignment(SwingConstants.BOTTOM);
 		panel_2.add(btnNewButton_12, BorderLayout.EAST);
 
+		this.setJTable();
+	}
+	
+	private void clearJTable() {
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		model.setRowCount(0);
+		table.repaint();
+		scrollPane.revalidate();
 	}
 
+	private void setJTable() {
+		this.clearJTable();
+		
+		DefaultTableModel dTModel = (DefaultTableModel) table.getModel();
+
+		String[] colName = {"Mã loại phòng", "Tên loại phòng", "Giá"};
+		dTModel.setColumnIdentifiers(colName);
+		
+		ArrayList<LoaiPhongModel> dslp = LoaiPhongModel.getInstance().layDSLoaiPhong();
+		for (int i = 0; i < dslp.size(); i++) {
+			LoaiPhongModel temp = dslp.get(i);
+			String[] rowValue = new String[colName.length];
+			rowValue[0] = temp.getMaLP();
+			rowValue[1] = temp.getTenLP();
+			rowValue[2] = String.valueOf(temp.getGia());
+			dTModel.addRow(rowValue);
+		}
+	}
 }

@@ -1,4 +1,4 @@
-package src.view;
+package view;
 
 import java.awt.EventQueue;
 
@@ -13,6 +13,9 @@ import java.awt.Font;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.TitledBorder;
+
+import model.LoaiPhongModel;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -20,9 +23,9 @@ import java.awt.event.ActionEvent;
 
 public class ThemLoaiPhongView extends JFrame {
 
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField maLPTextField;
+	private JTextField tenLPTextField;
+	private JTextField giaTextField;
 
 	/**
 	 * Launch the application.
@@ -76,10 +79,10 @@ public class ThemLoaiPhongView extends JFrame {
 		lblNewLabel_1.setBounds(10, 13, 116, 13);
 		panel.add(lblNewLabel_1);
 		
-		textField = new JTextField();
-		textField.setBounds(157, 12, 159, 19);
-		panel.add(textField);
-		textField.setColumns(10);
+		maLPTextField = new JTextField();
+		maLPTextField.setBounds(157, 12, 159, 19);
+		panel.add(maLPTextField);
+		maLPTextField.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Tên Loại Phòng");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -87,19 +90,23 @@ public class ThemLoaiPhongView extends JFrame {
 		lblNewLabel_2.setBounds(10, 48, 106, 13);
 		panel.add(lblNewLabel_2);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(157, 47, 159, 19);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		tenLPTextField = new JTextField();
+		tenLPTextField.setBounds(157, 47, 159, 19);
+		panel.add(tenLPTextField);
+		tenLPTextField.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Thêm");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LoaiPhongView lpv = new LoaiPhongView();
-				lpv.show();
-				dispose();
+				int ketqua = themLoaiPhong();
+				if (ketqua == 1) {
+					LoaiPhongView lpv = new LoaiPhongView();
+					lpv.show();
+					dispose();
+				}
 			}
 		});
+		
 		btnNewButton.setBounds(300, 113, 88, 21);
 		panel.add(btnNewButton);
 		
@@ -120,9 +127,17 @@ public class ThemLoaiPhongView extends JFrame {
 		lblNewLabel_2_1.setBounds(28, 82, 88, 13);
 		panel.add(lblNewLabel_2_1);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(157, 81, 159, 19);
-		panel.add(textField_2);
+		giaTextField = new JTextField();
+		giaTextField.setColumns(10);
+		giaTextField.setBounds(157, 81, 159, 19);
+		panel.add(giaTextField);
+	}
+	
+	public int themLoaiPhong() {
+		int ketqua = 0;
+		LoaiPhongModel lp = new LoaiPhongModel(maLPTextField.getText(), tenLPTextField.getText(), Integer.parseInt(giaTextField.getText()));
+//		System.out.println(lp.toString());
+		ketqua = lp.themLoaiPhong();
+		return ketqua;
 	}
 }
