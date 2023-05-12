@@ -14,11 +14,13 @@ public class JDBCUtil {
 		try {
 			// Đăng ký Oracle Driver với DriverManager
 			DriverManager.registerDriver(new OracleDriver());
+//			DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
 
 			// Cac thong so
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
 //			String url = "jdbc:oracle:thin:@localhost:1521/ORCLPDB1";
-			String username = "system";
+//			String username = "system";
+			String username = "sys as sysdba";
 			String password = "JusticeFreedom@26";
 
 			// Tao ket noi
