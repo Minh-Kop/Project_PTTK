@@ -22,14 +22,17 @@ public class LoaiPhongModel {
 		this.Gia = gia;
 	}
 	
+	public LoaiPhongModel(String tenLP, int gia) {
+		super();
+		this.MaLP = LoaiPhongDAO.getInstance().getMaLP();
+		this.TenLP = tenLP;
+		this.Gia = gia;
+	}
+	
 	public static LoaiPhongModel getInstance() {
 		if (instance == null)
 			instance = new LoaiPhongModel();
 		return instance;
-	}
-
-	public String getMaLP() {
-		return MaLP;
 	}
 	
 	public ArrayList<LoaiPhongModel> layDSLoaiPhong() {
@@ -41,6 +44,14 @@ public class LoaiPhongModel {
 	public int themLoaiPhong() {
 		int ketqua = LoaiPhongDAO.getInstance().insert(this);
 		return ketqua;
+	}
+	
+	public String getDBMaLP() {
+		return LoaiPhongDAO.getInstance().getMaLP();
+	}
+	
+	public String getMaLP() {
+		return MaLP;
 	}
 
 	public void setMaLP(String maLP) {
