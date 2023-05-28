@@ -29,6 +29,11 @@ public class LoaiPhongModel {
 		this.Gia = gia;
 	}
 	
+	public LoaiPhongModel(String maLP) {
+		super();
+		MaLP = maLP;
+	}
+
 	public static LoaiPhongModel getInstance() {
 		if (instance == null)
 			instance = new LoaiPhongModel();
@@ -43,6 +48,11 @@ public class LoaiPhongModel {
 	
 	public int themLoaiPhong() {
 		int ketqua = LoaiPhongDAO.getInstance().insert(this);
+		return ketqua;
+	}
+	
+	public int xoaLoaiPhong() {
+		int ketqua = LoaiPhongDAO.getInstance().delete(this);
 		return ketqua;
 	}
 	
