@@ -156,15 +156,12 @@ public class LoaiPhongDAO implements DAOInterface<LoaiPhongModel> {
 			// Bước 3: thực thi câu lệnh SQL
 			System.out.println(sql);
 			ResultSet rs = st.executeQuery();
-			System.out.println("rs1");
 
 			// Bước 4:
 			while (rs.next()) {
 				String malp = rs.getString(1);
-				System.out.println(malp);
 				String tenloaiphong = rs.getString(2);
 				int gia = rs.getInt(3);
-				System.out.println(gia);
 
 				LoaiPhongModel row = new LoaiPhongModel(malp, tenloaiphong, gia);
 				ketQua.add(row);

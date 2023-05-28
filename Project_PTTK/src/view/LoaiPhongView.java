@@ -233,7 +233,23 @@ public class LoaiPhongView extends JFrame {
 
 				if (option == JOptionPane.YES_OPTION) {
 					DefaultTableModel model = (DefaultTableModel) table.getModel();
-					model.removeRow(row);
+					Object value = model.getValueAt(row, 0);
+					String maLP = (String) value;
+					LoaiPhongModel lp = new LoaiPhongModel(maLP);
+					lp.toString();
+
+					int ketQua = lp.xoaLoaiPhong();
+					if (ketQua != 0) {
+						JOptionPane.showMessageDialog(null, "Đã xóa thành công!", "Thông báo",
+								JOptionPane.INFORMATION_MESSAGE);
+						setJTable();
+					} else {
+						JOptionPane.showMessageDialog(null, "Xóa không thành công!", "Thông báo",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
+
+//					DefaultTableModel model = (DefaultTableModel) table.getModel();
+//					model.removeRow(row);
 				} else {
 					System.out.println("Người dùng đã chọn Không đồng ý.");
 				}
