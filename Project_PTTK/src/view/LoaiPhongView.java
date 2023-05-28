@@ -11,24 +11,21 @@ import java.awt.GridLayout;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import database.JDBCUtil;
+import button.TableActionCellEditor;
+import button.TableActionCellRender;
+import button.TableDeleteActionEvent;
+import button.TableEditActionEvent;
 import model.LoaiPhongModel;
 
-import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
@@ -75,7 +72,7 @@ public class LoaiPhongView extends JFrame {
 
 		JButton btnNewButton_x = new JButton("Đăng xuất");
 		panel.add(btnNewButton_x);
-		
+
 		JButton btnNewButton_0 = new JButton("Phòng");
 		panel.add(btnNewButton_0);
 
@@ -125,27 +122,14 @@ public class LoaiPhongView extends JFrame {
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new BorderLayout(0, 10));
-		
-		String[] columnNames = { };
-		Object[][] data = {};
-		DefaultTableModel model = new DefaultTableModel(data, columnNames);
 
-		table = new JTable(model);
-//		JTable table = new JTable(data, columnNames);
-//		table.setModel(new DefaultTableModel(
-//			new Object[][] {
-//				{"LP01", "Ph\u00F2ng \u0111\u01A1n", "200000", "S\u1EEDa", "X"},
-//				{"LP02", "Ph\u00F2ng \u0111\u00F4i", "300000", "S\u1EEDa", "X"},
-//				{"LP03", "Ph\u00F2ng VIP", "500000", "S\u1EEDa", "X"},
-//			},
-//			new String[] {
-//				"M\u00E3 lo\u1EA1i ph\u00F2ng", "T\u00EAn lo\u1EA1i ph\u00F2ng", "Gi\u00E1", "S\u1EEDa", "X\u00F3a"
-//			}
-//		));
+		table = new JTable();
+		table.setRowHeight(50);
+
 		scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panel_1.add(scrollPane, BorderLayout.CENTER);
-		
+
 		JButton btnNewButton_12_1 = new JButton("Thêm loại phòng");
 		btnNewButton_12_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -195,7 +179,7 @@ public class LoaiPhongView extends JFrame {
 
 		this.setJTable();
 	}
-	
+
 	private void clearJTable() {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
@@ -205,20 +189,63 @@ public class LoaiPhongView extends JFrame {
 
 	private void setJTable() {
 		this.clearJTable();
-		
+
+		table.setModel(new DefaultTableModel(new Object[][] {},
+				new String[] { "Mã loại phòng", "Tên loại phòng", "Giá", "Chỉnh sửa", "Xóa" }) {
+			boolean[] canEdit = new boolean[] { false, false, false, true, true };
+
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit[columnIndex];
+			}
+		});
+//		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
 		DefaultTableModel dTModel = (DefaultTableModel) table.getModel();
 
-		String[] colName = {"Mã loại phòng", "Tên loại phòng", "Giá"};
-		dTModel.setColumnIdentifiers(colName);
-		
 		ArrayList<LoaiPhongModel> dslp = LoaiPhongModel.getInstance().layDSLoaiPhong();
 		for (int i = 0; i < dslp.size(); i++) {
 			LoaiPhongModel temp = dslp.get(i);
-			String[] rowValue = new String[colName.length];
+			String[] rowValue = new String[dTModel.getColumnCount()];
 			rowValue[0] = temp.getMaLP();
 			rowValue[1] = temp.getTenLP();
 			rowValue[2] = String.valueOf(temp.getGia());
 			dTModel.addRow(rowValue);
 		}
+
+		TableEditActionEvent editEvent = new TableEditActionEvent() {
+			@Override
+			public void onEdit(int row) {
+				DefaultTableModel model = (DefaultTableModel) table.getModel();
+				Object value = model.getValueAt(row, 1);
+				String tel = (String) value;
+				System.out.println("Tel: " + tel);
+			}
+		};
+
+		TableDeleteActionEvent deleteEvent = new TableDeleteActionEvent() {
+			@Override
+			public void onDelete(int row) {
+				if (table.isEditing()) {
+					table.getCellEditor().stopCellEditing();
+				}
+				int option = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa không?", "Xác nhận",
+						JOptionPane.YES_NO_OPTION);
+
+				if (option == JOptionPane.YES_OPTION) {
+					DefaultTableModel model = (DefaultTableModel) table.getModel();
+					model.removeRow(row);
+				} else {
+					System.out.println("Người dùng đã chọn Không đồng ý.");
+				}
+			}
+		};
+
+		table.getColumnModel().getColumn(table.getColumnCount() - 2).setCellRenderer(new TableActionCellRender(1));
+		table.getColumnModel().getColumn(table.getColumnCount() - 2)
+				.setCellEditor(new TableActionCellEditor(editEvent));
+
+		table.getColumnModel().getColumn(table.getColumnCount() - 1).setCellRenderer(new TableActionCellRender(2));
+		table.getColumnModel().getColumn(table.getColumnCount() - 1)
+				.setCellEditor(new TableActionCellEditor(deleteEvent));
 	}
 }
