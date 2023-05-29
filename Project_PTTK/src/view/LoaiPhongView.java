@@ -37,6 +37,7 @@ public class LoaiPhongView extends JFrame {
 	private JTextField txtTmTheoTn;
 	private JTable table;
 	private JScrollPane scrollPane;
+	private ArrayList<LoaiPhongModel> dslp;
 
 	/**
 	 * Launch the application.
@@ -134,7 +135,7 @@ public class LoaiPhongView extends JFrame {
 		btnNewButton_12_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ThemLoaiPhongView tlpv = new ThemLoaiPhongView();
-				tlpv.show();
+				tlpv.setVisible(true);
 				dispose();
 			}
 		});
@@ -202,7 +203,7 @@ public class LoaiPhongView extends JFrame {
 
 		DefaultTableModel dTModel = (DefaultTableModel) table.getModel();
 
-		ArrayList<LoaiPhongModel> dslp = LoaiPhongModel.getInstance().layDSLoaiPhong();
+		dslp = LoaiPhongModel.getInstance().layDSLoaiPhong();
 		for (int i = 0; i < dslp.size(); i++) {
 			LoaiPhongModel temp = dslp.get(i);
 			String[] rowValue = new String[dTModel.getColumnCount()];
@@ -215,10 +216,15 @@ public class LoaiPhongView extends JFrame {
 		TableEditActionEvent editEvent = new TableEditActionEvent() {
 			@Override
 			public void onEdit(int row) {
-				DefaultTableModel model = (DefaultTableModel) table.getModel();
-				Object value = model.getValueAt(row, 1);
-				String tel = (String) value;
-				System.out.println("Tel: " + tel);
+//				DefaultTableModel model = (DefaultTableModel) table.getModel();
+//				Object value = model.getValueAt(row, 1);
+//				String tel = (String) value;
+//				System.out.println("Tel: " + tel);
+				
+				SuaLoaiPhong suaLP = new SuaLoaiPhong(dslp.get(row));
+				suaLP.setVisible(true);
+				dispose();
+				
 			}
 		};
 
