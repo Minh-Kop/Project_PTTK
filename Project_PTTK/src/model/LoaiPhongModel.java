@@ -50,6 +50,11 @@ public class LoaiPhongModel {
 		int ketqua = LoaiPhongDAO.getInstance().insert(this);
 		return ketqua;
 	}
+
+	public int suaLoaiPhong() {
+		int ketqua = LoaiPhongDAO.getInstance().update(this);
+		return ketqua;
+	}
 	
 	public int xoaLoaiPhong() {
 		int ketqua = LoaiPhongDAO.getInstance().delete(this);
